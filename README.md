@@ -2,7 +2,7 @@
 
 ## About
 
-Dataconfigs provides a seamless integration between dataclasses as configs and any configurable classes that use these configs. The most powerful feature is that config attributes become part of configurable, i.e., no need for _explicit_ `.config` attribute (unless specified otherwise). This keep class definitions very siple yet decouples configurable parameters from class attributes. In terms of configs, it is a simplified hydra alternative, yet supporting more features.
+Dataconfigs seamlessly integrates dataclasses as configs with any configurable classes. Its standout feature is embedding config attributes directly into configurable classes, eliminating the need for an explicit `.config` attribute (unless specified). This keeps class definitions simple while decoupling configurable parameters from class attributes. It offers a simplified yet feature-rich alternative to Hydra for configs.
 
 ## Features
 
@@ -10,8 +10,9 @@ Last 3 features are in development:
 * Embedded config params in configurables (no need for separate `.config` attribute, unless specified otherwise)
 * Easy type annotations (visible annotations, even though configs are never inherited from)
 * Support for multiple, nested, hierarchical, and union configs, as well as non-atomic types
+* Auto-extract parameter descriptions from docstrings
+* Auto-generate or extend existing CLI commands to include config arguments & descriptions
 * Various file support (`json`, `yaml`, `pickle`)
-* CLI support
 * Decorator-based (inspired by Hydra)
 
 ## Quick Start
