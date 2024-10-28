@@ -22,7 +22,7 @@ Install the library:
 pip install dataconfigs
 ```
 
-Check the [demo]().
+Check the [demo](https://github.com/mantasu/dataconfigs/blob/main/notebooks/01-demo.ipynb).
 
 ### Simple Script Example
 
@@ -32,7 +32,7 @@ Check the [demo]().
 
 ```python
 from datacalsses import dataclass, is_dataclass
-from paconfig import configurable, show_config_params
+from dataconfigs import configurable, show_config_params
 
 @datacalss
 class MyConfig:
@@ -66,7 +66,7 @@ Assume you have `config.json` file as follows:
 
 One possibility is to directly make the configurable. Example `main.py`:
 ```python
-@configurable("path/to/config.json", MyConfigurable, attr1="attr1")
+@configurable.main("path/to/config.json", MyConfigurable, attr1="attr1")
 def main(my_configurable):
     pass
 
@@ -76,11 +76,11 @@ if __name__ == "__main__":
 
 We can still overwrite config params or the whole config file when calling:
 ```bash
-paconfig main.py --param2 'custom' # 111, 'custom'
-paconfig main.py --config path/to/config2.yaml
+dataconfigs main.py --param2 'custom' # 111, 'custom'
+dataconfigs main.py --config path/to/config2.yaml
 ```
 
-If we call `paconfig main.py -h`, descriptions will be extracted from docstrings:
+If we call `dataconfigs main.py -h`, descriptions will be extracted from docstrings:
 ```bash
 Options:
 --param1 : (int) The first parameter. Defaults to 111.
