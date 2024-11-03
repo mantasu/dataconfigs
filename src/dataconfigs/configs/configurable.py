@@ -200,6 +200,12 @@ class configurable[T, C]:
 
         return self._process_configurable(cls, configs)
 
+    # NOTE: the following overloads are not necessary, and, in fact,
+    # the `if` clause in __call__ is always true due to how __new__
+    # manages the arguments. However, these overloads trick the
+    # type-checkers into giving the correct type hints as they cannot
+    # infer the type logic from __new__.
+
     @overload
     def __call__[T](self, _: T) -> T | C: ...
 

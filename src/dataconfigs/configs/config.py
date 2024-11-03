@@ -15,7 +15,7 @@ else:
 class Config(DataclassInstance, Protocol):
     """An empty Config class.
 
-    This class mainly serves the purpose of a type-annotation, there is
+    This class mainly serves the purpose of a type-annotation - there is
     no need for the actual Config classes to extend this "parent".
     """
 

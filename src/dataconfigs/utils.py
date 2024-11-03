@@ -16,9 +16,8 @@ from typing import (
 if TYPE_CHECKING:
     from _typeshed import ReadableBuffer
 else:
+    from collections.abc import Buffer
     from typing import TypeAlias
-
-    from _collections_abc import Buffer
 
     ReadableBuffer: TypeAlias = Buffer
 
@@ -135,24 +134,20 @@ def unpack_typevar(annotation: TypeVar) -> type[Any] | UnpackableType | None:
         3. Bound
 
     Examples:
-        >>> T = TypeVar("T")
-        >>> TC = TypeVar("TC", str, bytes)
-        >>> TB = TypeVar("TB", bound=os.PathLike | str | bytes)
-        >>> TCD = TypeVar("TCD", str, bytes, default=str)
-        >>> TBD = TypeVar("TBD", default=str, bound=str | bytes)
-        >>> unpack_typevar(T)
+        >>> from typing import TypeVar
+        >>> unpack_typevar(TypeVar("T"))
         None
-        >>> unpack_typevar(TC)
-        Union[str, bytes]
-        >>> unpack_typevar(TB)
-        os.PathLike | str | bytes
-        >>> unpack_typevar(TCD)
+        >>> unpack_typevar(TypeVar("TC", int, float))
+        Union[int, float]
+        >>> unpack_typevar(TypeVar("TB", bound=os.PathLike | str))
+        os.PathLike | str
+        >>> unpack_typevar(TypeVar("TCD", str, bytes, default=str))
         str
-        >>> unpack_typevar(TBD)
+        >>> unpack_typevar(TypeVar("TBD", default=str, bound=str | int))
         str
 
     Args:
-        annotation (TypeVar): The TypeVar annotation to unpack.
+        annotation (typing.TypeVar): The TypeVar annotation to unpack.
 
     Returns:
         type[typing.Any] | UnpackableType | None: The unpacked basic
@@ -188,6 +183,7 @@ def unpack_type(
     annotation into a tuple of basic types.
 
     Examples:
+        >>> from typing import Union
         >>> unpack_type(Union[int, str])
         (int, str)
         >>> type MyBoundedGenericType[T: int | float] = T | list[T]
@@ -197,19 +193,19 @@ def unpack_type(
     Args:
         annotation (type[typing.Any] | UnpackableType): The type
             annotation to unpack.
-        globals (dict[str, Any] | None, optional): The globals
+        globals (dict[str, typing.Any] | None, optional): The globals
             dictionary to use for evaluation if the annotation is of
             type :class:`str`, :class:`types.CodeType`,
-            :class:`collections.abc.Buffer`, or :class:`ForwardRef`.
-            Simply pass `globals()` if that's the case. Defaults to
-            :data:`None`.
-        locals (Mapping[str, object] | None, optional): The locals
-            dictionary to use for evaluation if the annotation is of
-            type :class:`str`, :class:`types.CodeType`,
-            :class:`collections.abc.Buffer`, or :class:`ForwardRef`.
-            Simply pass `locals()` if that's the case. Defaults to
-            :data:`None`.
-        generic_kwargs (dict[str, type[typing.Any]  |  UnpackableType], optional):
+            :class:`collections.abc.Buffer`, or
+            :class:`typing.ForwardRef`. Simply pass `globals()` if
+            that's the case. Defaults to :data:`None`.
+        locals (typing.Mapping[str, object] | None, optional): The
+            locals dictionary to use for evaluation if the annotation is
+            of type :class:`str`, :class:`types.CodeType`,
+            :class:`collections.abc.Buffer`, or
+            :class:`typing.ForwardRef`. Simply pass `locals()` if that's
+            the case. Defaults to :data:`None`.
+        generic_kwargs (dict[str, type[typing.Any] | UnpackableType], optional):
             The generic arguments to use for unpacking the generic
             types. Key is the name of teh generic parameter and value
             is its argument. If not provided, generic arguments will be
