@@ -1,2 +1,10 @@
-ipykernel
+# Dependencies
 docstring-parser
+
+# Notebooks
+ipykernel
+
+# Testing
+typing_extentions
+
+# Documentation

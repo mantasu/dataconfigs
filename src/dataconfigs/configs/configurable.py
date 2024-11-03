@@ -35,6 +35,8 @@ def is_configurable(obj: Any) -> bool:
 class configurable[T, C]:
     """
 
+    Also registers any Configurables so they can be easily instantiated.
+
     Warning:
         Very rare case: if you create your configurable class
         dynamically (if you don't know what it means then ignore this

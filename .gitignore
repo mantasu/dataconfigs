@@ -5,3 +5,10 @@ _build
 _templates
 __pycache__
 *.egg-info
+
+# IDE
+.vscode
+
+# Other/temporary
+notebooks/99-tests.ipynb
+tutorials.md

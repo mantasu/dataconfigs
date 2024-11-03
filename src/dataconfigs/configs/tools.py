@@ -1,4 +1,5 @@
-from .configurable import _CONFIG_PARAMS, Configurable
+from .config import Config
+from .configurable import _CONFIG_PARAMS, Configurable, configurable
 
 
 def show_config_params(obj: Configurable | type[Configurable]) -> None:
@@ -21,3 +22,7 @@ def show_config_params(obj: Configurable | type[Configurable]) -> None:
         # Remove first new line and print locals
         print(f"{obj.__class__.__name__} instance config parameters (local defaults):")
         print(desc.replace("\n", "", 1))
+
+
+def from_config(config: Config | tuple[Config, ...]) -> Configurable:
+    pass
